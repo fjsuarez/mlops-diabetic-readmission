@@ -1,3 +1,9 @@
+"""
+config.py
+
+Utility functions for loading configuration files.
+"""
+
 import os
 import yaml
 

@@ -15,7 +15,7 @@ class TestDataLoader:
         return """encounter_id,patient_nbr,race,gender,age,weight,admission_type_id,discharge_disposition_id,admission_source_id,time_in_hospital,payer_code,medical_specialty,num_lab_procedures,num_procedures,num_medications,number_outpatient,number_emergency,number_inpatient,diag_1,diag_2,diag_3,number_diagnoses,max_glu_serum,A1Cresult,metformin,repaglinide,nateglinide,chlorpropamide,glimepiride,acetohexamide,glipizide,glyburide,tolbutamide,pioglitazone,rosiglitazone,acarbose,miglitol,troglitazone,tolazamide,examide,citoglipton,insulin,glyburide-metformin,glipizide-metformin,glimepiride-pioglitazone,metformin-rosiglitazone,metformin-pioglitazone,change,diabetesMed,readmitted
 2278392,8222157,Caucasian,Female,[0-10),?,6,25,1,1,?,Pediatrics-Endocrinology,41,0,1,0,0,0,250.83,?,?,1,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,NO
 149190,55629189,Caucasian,Female,[10-20),?,1,1,7,3,?,?,59,0,18,0,0,0,276,250.01,255,9,None,None,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Up,No,No,No,No,No,Ch,Yes,>30
-64410,86047875,AfricanAmerican,Female,[20-30),?,1,1,7,2,?,?,11,5,13,2,0,1,648,250,V27,6,None,None,No,No,No,No,No,No,Steady,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO"""
+64410,86047875,AfricanAmerican,Female,[20-30),?,1,1,7,2,?,?,11,5,13,2,0,1,648,250,V27,6,None,None,No,No,No,No,No,No,Steady,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,No,Yes,NO"""  # noqa: E501
 
     @pytest.fixture
     def temp_csv_file(self, sample_csv_data):
@@ -29,7 +29,7 @@ class TestDataLoader:
     @pytest.fixture
     def temp_config_file(self, temp_csv_file):
         """Create a temporary config file for testing."""
-        config_content = f"""data_load:
+        config_content = f"""data_source:
   raw_path: "{temp_csv_file}"
   type: "csv"
   delimiter: ","
@@ -70,7 +70,7 @@ class TestDataLoader:
         # Modify config to point to non-existent file
         with open(temp_config_file, "w") as f:
             f.write(
-                """data_load:
+                """data_source:
   raw_path: "non_existent_file.csv"
   type: "csv"
 """
@@ -82,7 +82,7 @@ class TestDataLoader:
 
     def test_load_data_no_raw_path(self):
         """Test loading data when no raw_path is specified."""
-        config_content = """data_load:
+        config_content = """data_source:
   type: "csv"
 """
         with NamedTemporaryFile(mode="w", suffix=".yaml", delete=False) as f:
@@ -91,14 +91,16 @@ class TestDataLoader:
 
         try:
             loader = DataLoader(temp_config_path)
-            with pytest.raises(ValueError, match="No raw_path specified"):
+            with pytest.raises(
+                ValueError, match="No file path specified in configuration"
+            ):
                 loader.load_data()
         finally:
             os.unlink(temp_config_path)
 
     def test_unsupported_file_type(self, temp_csv_file):
         """Test loading unsupported file type."""
-        config_content = f"""data_load:
+        config_content = f"""data_source:
   raw_path: "{temp_csv_file}"
   type: "unsupported_format"
 """
@@ -119,7 +121,7 @@ class TestDataLoader:
             mock_setup_logging,
             temp_config_file):
         """Test the convenience function load_diabetic_data."""
-        df = load_diabetic_data(temp_config_file)
+        df = load_diabetic_data(config_path=temp_config_file)
 
         assert isinstance(df, pd.DataFrame)
         assert len(df) == 3
@@ -134,7 +136,7 @@ class TestDataLoader:
             f.write(csv_data_semicolon)
             temp_csv_path = f.name
 
-        config_content = f"""data_load:
+        config_content = f"""data_source:
   raw_path: "{temp_csv_path}"
   type: "csv"
   delimiter: ";"
@@ -183,7 +185,7 @@ class TestDataLoader:
         mock_df = pd.DataFrame({"col1": [1, 2], "col2": [3, 4]})
         mock_read_excel.return_value = mock_df
 
-        config_content = """data_load:
+        config_content = """data_source:
   raw_path: "test.xlsx"
   type: "excel"
   header: 0

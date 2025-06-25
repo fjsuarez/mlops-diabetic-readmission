@@ -1,7 +1,7 @@
 """
 data_load/run.py
 
-MLflow-compatible, modular data loading step with Hydra config, 
+MLflow-compatible, modular data loading step with Hydra config,
 W&B artifact logging, and robust error handling.
 """
 
@@ -13,11 +13,13 @@ from omegaconf import DictConfig
 from datetime import datetime
 from dotenv import load_dotenv
 from pathlib import Path
-from data_loader import DataLoader
-
-load_dotenv()
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from data_loader import DataLoader  # noqa: E402
+
+load_dotenv()
 
 logging.basicConfig(
     level=logging.INFO,

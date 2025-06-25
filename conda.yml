@@ -1,0 +1,9 @@
+name: mlops-orch
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - mlflow
+  - conda-forge::hydra-core
+  - conda-forge::wandb=0.20.1
+  - python-dotenv

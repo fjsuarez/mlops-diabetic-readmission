@@ -92,7 +92,8 @@ class DataLoader:
             )
 
 
-def load_diabetic_data(config_path: str = "config.yaml") -> pd.DataFrame:
+def load_diabetic_data(logger=None,
+                       config_path: str = "config.yaml") -> pd.DataFrame:
     """
     Convenience function to load diabetic readmission data.
 
@@ -102,17 +103,18 @@ def load_diabetic_data(config_path: str = "config.yaml") -> pd.DataFrame:
     Returns:
         pd.DataFrame: Loaded data
     """
-    setup_logging()
+    if logger is None:
+        logger = setup_logging()
 
     loader = DataLoader(config_path)
     return loader.load_data()
 
 
 if __name__ == "__main__":
-    logger = setup_logging()
+    logger = setup_logging(log_file="data_loader.log", level="DEBUG")
 
     try:
-        df = load_diabetic_data()
+        df = load_diabetic_data(logger=logger)
         print(f"Data shape: {df.shape}")
         print(f"Columns: {list(df.columns)}")
 

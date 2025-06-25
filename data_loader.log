@@ -1,0 +1,6 @@
+2025-06-26 01:13:40,522 - INFO - __main__ - Loading config from: config.yaml
+2025-06-26 01:13:40,523 - INFO - __main__ - Loading data from: /home/fjsuarez/mlops/mlops-diabetic-readmission/data/raw/diabetic_readmission_data.csv
+2025-06-26 01:13:40,892 - INFO - __main__ - Successfully loaded data with shape: (101766, 50)
+2025-06-26 01:13:59,193 - INFO - __main__ - Loading config from: config.yaml
+2025-06-26 01:13:59,196 - INFO - __main__ - Loading data from: /home/fjsuarez/mlops/mlops-diabetic-readmission/data/raw/diabetic_readmission_data.csv
+2025-06-26 01:13:59,592 - INFO - __main__ - Successfully loaded data with shape: (101766, 50)
