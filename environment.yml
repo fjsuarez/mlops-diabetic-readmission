@@ -3,7 +3,6 @@ channels:
   - defaults
 dependencies:
   - python=3.12
-  - mlflow
   - fastapi
   - conda-forge::hydra-core
   - black
@@ -12,3 +11,5 @@ dependencies:
   - pytest-cov
   - pytest-mock
   - conda-forge::wandb=0.20.1
+  - conda-forge::mlflow
+  - python-dotenv
