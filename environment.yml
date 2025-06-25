@@ -1,0 +1,14 @@
+name: mlflow
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - mlflow
+  - fastapi
+  - conda-forge::hydra-core
+  - black
+  - flake8
+  - pytest
+  - pytest-cov
+  - pytest-mock
+  - conda-forge::wandb=0.20.1

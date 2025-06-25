@@ -1,0 +1,7 @@
+name: diabetic_data_loading
+
+conda_env: conda.yml
+
+entry_points:
+  main:
+    command: "python run.py"
