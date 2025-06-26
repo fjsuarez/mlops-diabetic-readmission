@@ -20,6 +20,7 @@ jobs:
           python-version: 3.12
           miniforge-variant: Miniforge3
           use-mamba: true
+          conda-remove-defaults: true
 
       - name: Create conda environment
         shell: bash -l {0}
