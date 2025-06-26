@@ -1,0 +1,12 @@
+name: mlflow-feature-eng
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - pandas
+  - mlflow
+  - conda-forge::hydra-core
+  - python-dotenv
+  - pyyaml
+  - conda-forge::wandb=0.20.1
+  - scikit-learn

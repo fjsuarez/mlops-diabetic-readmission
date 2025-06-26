@@ -1,0 +1,7 @@
+name: feature_eng
+
+conda_env: conda.yml
+
+entry_points:
+  main:
+    command: "python run.py"
