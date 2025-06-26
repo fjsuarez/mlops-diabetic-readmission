@@ -1,1 +1,1 @@
-[![CI](https://github.com/fjsuarez/mlops-diabetic-readmission/actions/workflows/ci.yml/badge.svg)](https://github.com/fjsuarez/mlops-diabetic-readmission/actions/workflows/ci.yml)
+[![CI](https://github.com/fjsuarez/mlops-diabetic-readmission/actions/workflows/ci.yml/badge.svg)](https://github.com/fjsuarez/mlops-diabetic-readmission/actions/workflows/ci.yml) [![codecov](https://codecov.io/gh/fjsuarez/mlops-diabetic-readmission/graph/badge.svg?token=CXDLWCEE3X)](https://codecov.io/gh/fjsuarez/mlops-diabetic-readmission)

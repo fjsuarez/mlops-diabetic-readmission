@@ -60,10 +60,6 @@ class DataLoader:
                 df = self._load_csv(file_path)
             elif file_type == "excel" or file_type == "xlsx":
                 df = self._load_excel(file_path)
-            elif file_type == "json":
-                df = self._load_json(file_path)
-            elif file_type == "parquet":
-                df = self._load_parquet(file_path)
             else:
                 raise ValueError(f"Unsupported file type: {file_type}")
 
