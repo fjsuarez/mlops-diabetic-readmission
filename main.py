@@ -12,6 +12,7 @@ load_dotenv()
 PIPELINE_STEPS = [
     "data_load",
     "data_validation",
+    "preprocess"
 ]
 
 # Only these steps accept Hydra overrides via MLflow parameters

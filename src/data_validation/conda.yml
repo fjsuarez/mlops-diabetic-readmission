@@ -1,4 +1,4 @@
-name: mlflow-data-load
+name: mlflow-data-validation
 channels:
   - defaults
 dependencies:

@@ -214,3 +214,9 @@ data_validation:
         dtype: "str"
         required: true
         allowed_values: ["NO", "<30", ">30"]
+
+preprocessing:
+  enabled: true
+  drop_columns: ['weight', 'payer_code', 'medical_specialty', 'examide', 'citoglipton']
+  exclude_discharge_disposition: [11]  # Death
+  na_indicators: ['?', 'Unknown/Invalid']
