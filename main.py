@@ -10,7 +10,8 @@ import wandb
 load_dotenv()
 
 PIPELINE_STEPS = [
-    "data_load"
+    "data_load",
+    "data_validation",
 ]
 
 # Only these steps accept Hydra overrides via MLflow parameters

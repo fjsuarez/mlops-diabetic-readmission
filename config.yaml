@@ -12,8 +12,205 @@ data_source:
   delimiter: ","
   header: 0
   encoding: "utf-8"
+  keep_default_na: false
+  na_values: ['']
 
 data_load:
   log_sample_artifacts: true
   log_summary_stats: true
   log_artifacts: true
+
+data_validation:
+  enabled: true
+  action_on_error: "raise"
+  report_path: "logs/validation_report.json"
+  schema:
+    columns:
+      - name: "encounter_id"
+        dtype: "int"
+        required: true
+        min: 1
+      - name: "patient_nbr"
+        dtype: "int"
+        required: true
+        min: 1
+      - name: "race"
+        dtype: "str"
+        required: false
+        allowed_values: ["Caucasian", "AfricanAmerican", "Hispanic", "Asian", "Other", "?"]
+      - name: "gender"
+        dtype: "str"
+        required: true
+        allowed_values: ["Male", "Female", "Unknown/Invalid"]
+      - name: "age"
+        dtype: "str"
+        required: true
+        allowed_values: ["[0-10)", "[10-20)", "[20-30)", "[30-40)", "[40-50)", "[50-60)", "[60-70)", "[70-80)", "[80-90)", "[90-100)"]
+      - name: "admission_type_id"
+        dtype: "int"
+        required: true
+        min: 1
+        max: 8
+      - name: "discharge_disposition_id"
+        dtype: "int"
+        required: true
+        min: 1
+        max: 29
+      - name: "admission_source_id"
+        dtype: "int"
+        required: true
+        min: 1
+        max: 25
+      - name: "time_in_hospital"
+        dtype: "int"
+        required: true
+        min: 1
+        max: 14
+      - name: "num_lab_procedures"
+        dtype: "int"
+        required: true
+        min: 0
+        max: 132
+      - name: "num_procedures"
+        dtype: "int"
+        required: true
+        min: 0
+        max: 6
+      - name: "num_medications"
+        dtype: "int"
+        required: true
+        min: 1
+        max: 81
+      - name: "number_outpatient"
+        dtype: "int"
+        required: true
+        min: 0
+        max: 42
+      - name: "number_emergency"
+        dtype: "int"
+        required: true
+        min: 0
+        max: 76
+      - name: "number_inpatient"
+        dtype: "int"
+        required: true
+        min: 0
+        max: 21
+      - name: "diag_1"
+        dtype: "str"
+        required: false
+      - name: "diag_2"
+        dtype: "str"
+        required: false
+      - name: "diag_3"
+        dtype: "str"
+        required: false
+      - name: "number_diagnoses"
+        dtype: "int"
+        required: true
+        min: 1
+        max: 16
+      - name: "max_glu_serum"
+        dtype: "str"
+        required: false
+        allowed_values: ["None", ">200", ">300", "Norm", "?"]
+      - name: "A1Cresult"
+        dtype: "str"
+        required: false
+        allowed_values: ["None", ">7", ">8", "Norm", "?"]
+      - name: "metformin"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "repaglinide"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "nateglinide"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "chlorpropamide"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "glimepiride"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "acetohexamide"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "glipizide"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "glyburide"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "tolbutamide"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "pioglitazone"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "rosiglitazone"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "acarbose"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "miglitol"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "troglitazone"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "tolazamide"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "insulin"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "glyburide-metformin"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "glipizide-metformin"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "glimepiride-pioglitazone"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "metformin-rosiglitazone"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "metformin-pioglitazone"
+        dtype: "str"
+        required: false
+        allowed_values: ["No", "Down", "Steady", "Up", "?"]
+      - name: "change"
+        dtype: "str"
+        required: true
+        allowed_values: ["No", "Ch"]
+      - name: "diabetesMed"
+        dtype: "str"
+        required: true
+        allowed_values: ["No", "Yes"]
+      - name: "readmitted"
+        dtype: "str"
+        required: true
+        allowed_values: ["NO", "<30", ">30"]

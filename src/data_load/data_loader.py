@@ -79,12 +79,18 @@ class DataLoader:
             delimiter=self.data_config.get("delimiter", ","),
             header=self.data_config.get("header", 0),
             encoding=self.data_config.get("encoding", "utf-8"),
+            keep_default_na=self.data_config.get("keep_default_na", True),
+            na_values=self.data_config.get("na_values", None),
         )
 
     def _load_excel(self, file_path: str) -> pd.DataFrame:
         """Load Excel file."""
         return pd.read_excel(
-                file_path, header=self.data_config.get("header", 0)
+                file_path, header=self.data_config.get("header", 0),
+                sheet_name=self.data_config.get("sheet_name", 0),
+                engine=self.data_config.get("engine", "openpyxl"),
+                keep_default_na=self.data_config.get("keep_default_na", True),
+                na_values=self.data_config.get("na_values", None),
             )
 
 
